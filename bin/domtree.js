@@ -185,6 +185,11 @@ const attributes = [
   'frameborder'
 ];
 
+const use_actual_value = [
+    'datetime', 'frameborder', 'height', 'media',
+    'sizes', 'srclang', 'width'
+];
+
 function getDummyAttributes(node) {
   let str = '';
   const tag = node.localName;
@@ -341,8 +346,7 @@ function toDummyValue(tag, attr, actual, node) {
       return `group${sequence.optgroup++}`;
     }
   }
-  if (attr == 'media' || attr == 'sizes' || attr == 'width' || attr == 'height'
-    || attr == 'datetime' || attr == 'srclang' || attr == 'frameborder') {
+  if (use_actual_value.includes(attr)) {
     return actual;
   }
   if (attr == 'rel') {
