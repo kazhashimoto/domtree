@@ -1,0 +1,27 @@
+{
+  "name": "domtree",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "domtree": "domtree.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint bin/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kazhashimoto/domtree.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kazhashimoto/domtree/issues"
+  },
+  "homepage": "https://github.com/kazhashimoto/domtree#readme",
+  "devDependencies": {
+    "eslint": "^7.31.0"
+  }
+}
