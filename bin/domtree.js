@@ -227,7 +227,11 @@ const sequence = {
 
 function toDummyURL(actual) {
   let url;
+  actual = actual.trim();
   if (/^#/.test(actual)) {
+    if (actual == '#') {
+      return '#';
+    }
     url = `#id${sequence.id++}`
   } else if (/^(https?:)?\/{2}/.test(actual)){
     url = `${config.dummy.site}/page${sequence.url++}.html`
