@@ -23,7 +23,8 @@ program
   .option('-d, --dummy', 'insert dummy text and links')
   .option('--no-head', 'remove html head from output')
   .option('--head <path>', 'include html head from template file')
-  .option('--placeholder', 'embed placeholder images');
+  .option('--placeholder', 'embed placeholder images')
+  .option('--rehash', 'rehash Lorem Ipsum table');
 
 program.parse(process.argv);
 const options = program.opts();
@@ -379,6 +380,9 @@ function writeDummyText(node) {
         newstr = toTimeVal(e.textContent);
       }
       if (!newstr) {
+        if (options.rehash && !text_count_log.length) {
+          rehashLoremIpsum();
+        }
         newstr = LoremIpsum(size);
       }
       process.stdout.write(newstr);
