@@ -34,11 +34,7 @@ if (options.dummy) {
 }
 debug('options', options);
 
-if (!program.args.length) {
-  program.help();
-}
-
-const htmlPath = program.args[0];
+const htmlPath = program.args.length? program.args[0]: '/dev/stdin';
 
 let head = null;
 // default html head
