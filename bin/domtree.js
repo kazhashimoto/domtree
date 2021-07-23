@@ -24,7 +24,8 @@ program
   .option('--no-head', 'remove html head from output')
   .option('--head <path>', 'include html head from template file')
   .option('--placeholder', 'embed placeholder images')
-  .option('--rehash', 'rehash Lorem Ipsum table');
+  .option('--rehash', 'rehash Lorem Ipsum table')
+  .option('--fill', 'insert dummy text to elements with no content');
 
 program.parse(process.argv);
 const options = program.opts();
@@ -126,6 +127,12 @@ const br_before_end_tag = [
 
 const ignore_elements = [
   'link', 'script', 'style', 'svg'
+];
+
+const fill_enable_elements = [
+  'a', 'div', 'dt', 'dd',
+  'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+  'li', 'p'
 ];
 
 function is_ignore(node) {
@@ -352,7 +359,7 @@ const TEXT_NODE = 3;
 const text_count_log = [];
 let rehashed = false;
 
-function writeDummyText(node) {
+function writeDummyText(node, fill) {
   let count = 0;
   let is_timeval = false;
   if (node.localName == 'time' || node.parentNode.localName == 'time') {
@@ -379,6 +386,9 @@ function writeDummyText(node) {
       }
       if (is_timeval) {
         newstr = toTimeVal(e.textContent);
+      }
+      if (fill) {
+        newstr = null;
       }
       if (!newstr) {
         if (options.rehash && !rehashed) {
@@ -440,10 +450,18 @@ function writeNode(node, depth) {
   }
   let first = true;
   let reduced = true;
+  let fill = false;
   let child;
   if (options.dummy) {
     let dx = text_count_log.length;
     child = node.firstChild;
+    if (options.fill && !child) {
+      if (fill_enable_elements.includes(tag)) {
+        node.textContent = 'a';
+        child = node.firstChild;
+        fill = true;
+      }
+    }
     while (child) {
       if (child.nodeType === ELEMENT_NODE) {
         const st = writeNode(child, depth + 1);
@@ -452,7 +470,7 @@ function writeNode(node, depth) {
         }
         first = false;
       } else if (child.nodeType === TEXT_NODE) {
-        writeDummyText(node);
+        writeDummyText(node, fill);
       }
       child = child.nextSibling;
     }
