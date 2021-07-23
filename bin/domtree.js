@@ -350,6 +350,7 @@ function toDummyValue(tag, attr, actual, node) {
 const ELEMENT_NODE = 1;
 const TEXT_NODE = 3;
 const text_count_log = [];
+let rehashed = false;
 
 function writeDummyText(node) {
   let count = 0;
@@ -380,8 +381,9 @@ function writeDummyText(node) {
         newstr = toTimeVal(e.textContent);
       }
       if (!newstr) {
-        if (options.rehash && !text_count_log.length) {
+        if (options.rehash && !rehashed) {
           rehashLoremIpsum();
+          rehashed = true;
         }
         newstr = LoremIpsum(size);
       }
