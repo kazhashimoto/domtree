@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "domtree": "domtree.js"
+    "domtree": "./bin/domtree.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,7 +16,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kazhashimoto/domtree/issues"
   },
