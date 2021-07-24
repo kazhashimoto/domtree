@@ -23,5 +23,10 @@
   "homepage": "https://github.com/kazhashimoto/domtree#readme",
   "devDependencies": {
     "eslint": "^7.31.0"
+  },
+  "dependencies": {
+    "commander": "^8.0.0",
+    "debug": "^4.3.2",
+    "jsdom": "^16.6.0"
   }
 }
